@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    
     "start": "node server.js",
-    "seed": "node seed/seedData.js"
+    "seed": "node seed/seedData.js",
+    "vercel-build": "echo 'No build necessary'"
+
   },
   "keywords": [],
   "author": "",
