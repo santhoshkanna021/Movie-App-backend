@@ -2,9 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const movieRoutes = require('../server/routers/movies');
+const movieRoutes = require('./routers/movies'); // already correct path
 
-dotenv.config(); // Load environment variables from .env
+dotenv.config();
 
 const app = express();
 
@@ -14,27 +14,22 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('🎬 Movie API is running!');
-  });
-  
+});
 
-// Routes
 app.use('/api/movies', movieRoutes);
 
-// MongoDB connection
-const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
+// MongoDB connection (don't call listen)
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(() => {
   console.log('✅ MongoDB connected');
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
 })
 .catch((err) => {
   console.error('❌ MongoDB connection error:', err);
 });
 
+module.exports = app;
