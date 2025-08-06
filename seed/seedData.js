@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Movies = require("../models/movies");
 
-// No import here ⛔ — define data manually
-dotenv.config();
+// Load .env config
+dotenv.config(); // Make sure this is called before using process.env
 
 const trendingData = [
   { id: 't-1', title: 'Squid Game', image: '/Group 66718.svg', genre: 'Action • Series', rating: 4.8, releaseDate: '2024', runtime: '1h 0m', ratingPG: 'TV-MA', overview: 'A group of contestants risk their lives in deadly games.' },
@@ -31,11 +31,12 @@ const popularData = [
 
 const allMoviesData = [...trendingData, ...popularData];
 
-// Connect and seed
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(async () => {
-    await Movies.deleteMany(); // Optional: clear existing data
     await Movies.insertMany(allMoviesData);
     console.log("✅ Movies data seeded successfully.");
     mongoose.disconnect();

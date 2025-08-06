@@ -1,19 +1,22 @@
 {
   "name": "movie-app-backend",
   "version": "1.0.0",
-  "description": "Express backend for Movie App, deployed via Vercel Serverless Functions",
+  "description": "Express backend for the Movie App, compatible with both local and Vercel deployments.",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node server.js",
-    "seed": "node server/seed/seedData.js",
-    "vercel-build": "echo 'No build necessary'"
+    "start": "node server.js",                       
+    "seed": "node server/seed/seedData.js",          
+    "dev": "nodemon server.js",                     
+    "vercel-build": "echo 'No build step required'"  
   },
   "keywords": [
     "express",
     "mongodb",
     "vercel",
-    "serverless"
+    "serverless",
+    "api",
+    "movie"
   ],
   "author": "Santhoshkanna",
   "license": "ISC",
@@ -22,5 +25,8 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "mongoose": "^8.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
